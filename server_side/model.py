@@ -20,4 +20,6 @@ validation = ImageDataGenerator(rescale = 1/255)
 
 train_dataset = train.flow_from_directory(path+"/training", target_size = (480, 270), batch_size = 36, class_mode = 'binary', )
 test_dataset = test.flow_from_directory(path+"/testing", target_size = (480, 270), batch_size = 36, class_mode = 'binary', )
-validation_dataset = validation.flow_from_directory(path+"/va
+validation_dataset = validation.flow_from_directory(path+"/validation", target_size = (480, 270), batch_size = 36, class_mode = 'binary', )
+
+print(train_dataset[0])
