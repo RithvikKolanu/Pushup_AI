@@ -1,6 +1,6 @@
 import cv2
 
-capture = cv2.VideoCapture('c:/projects/workout_app/server_side/Content/good_form.mp4')
+capture = cv2.VideoCapture('c:/projects/workout_app/server_side/Content/bad_form.mp4')
 framenr = 0
 
 while(True):
