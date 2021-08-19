@@ -1,50 +1,58 @@
 import "./App.css"
-import Typography from '@material-ui/core/Typography';
-import Button from "@material-ui/core/Button"
-import { useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
 function App() {
 
-  const [userName, setUserName] = useState('');
-  const [userHeight, setUserHeight] = useState('0');
-  const [userWeight, setUserWeight] = useState('0');
+  const feedback = useState('Insert Workout Feedback Here');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const userInformation = { userName, userHeight, userWeight };
+  const videoRef = useRef(null);
+  const photoRef = useRef(null);
 
-    fetch('http://localhost:8000/userData', {
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(userInformation)
-    })
+  const getVideo = () => {
+    navigator.mediaDevices
+      .getUserMedia({
+        video: { width: 1920, height: 1080}
+      })
+      .then(stream => {
+        let video = videoRef.current;
+        video.srcObject = stream;
+        video.play();
+      })
+      .catch(err => {
+        console.error(err);
+      })
   }
+
+  // This is where you'll get you're image, you're processing what's under the context variable.
+  // P.S. The function isn't actually being called anywhere, that'll need to be done as well.
+  const getPhoto = () => {
+    let video = videoRef.current;
+    let photo = photoRef.current;
+    photo.width = 1920;
+    photo.height = 1080;
+    let context = photo.getContext('2d');
+    context.drawImage(video, 0, 0, 1920, 1080);
+  }
+
+  useEffect(() =>  {
+    getVideo();
+  }, [videoRef])
 
   return (
     <div className="App">
-      <header className="form">
+      <div className="camera">
+        <video ref={videoRef}></video>
         <br></br>
-        <Typography variant="h4" align="center">
-          Personal Information
-        </Typography>
-        
         <br></br>
-        <form onSubmit={handleSubmit}>
-          <label>Name:</label>
-          <input type="text" required value={userName} onChange={(e) => setUserName(e.target.value)}></input>
-          <br></br>
-          <label>Height (cm):</label>
-          <input type="number" required value={userHeight} onChange={(e) => setUserHeight(e.target.value)}></input>
-          <br></br>
-          <label>Weight (kg):</label>
-          <input type="number" required value={userWeight} onChange={(e) => setUserWeight(e.target.value)}></input>
-
-          <br></br>
-          <Button variant="contained" align="center">Submit</Button>
-        </form>
-      </header>
+        <h1 align="center" style={{color: 'white'}}>
+          {feedback}
+        </h1>
+      </div>
+      <div className={'result'}>
+        <canvas ref={photoRef}></canvas>
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
