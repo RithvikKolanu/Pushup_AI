@@ -3,10 +3,11 @@ import matplotlib.pyplot as plt
 import numpy as np 
 import cv2
 import os
+from tensorflow.keras import optimizers
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.optimizers import RMSprop
-from tensorflow.python.keras.backend import conv2d
+from tensorflow.python.keras.backend import binary_crossentropy, conv2d
 
 #this is the path for the pictures
 #make this a relative path
@@ -30,16 +31,16 @@ print(train_dataset.class_indices)
 cnn = tf.keras.models.Sequential()
 
 #adding a filter to the CNN
-cnn.add(tf.keras.layers.Conv2d(filters=32, kernel_size = 3, activation="relu", input_shape=[64, 64, 3]))
+cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size = 3, activation="relu", input_shape=[64, 64, 3]))
 
 #Pooling layer -> makes the convolution layers smaller
-cnn.add(tf.keras.layers.MaxPool2d(pool_size = 2, strides=2))
+cnn.add(tf.keras.layers.MaxPool2D(pool_size = 2, strides=2))
 
 #Second filter
-cnn.add(tf.keras.layers.Conv2d(filters=32, kernel_size = 3, activation="relu"))
+cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size = 3, activation="relu"))
 
 #Second pooling layer
-cnn.add(tf.keras.layers.MaxPool2d(pool_size = 2, strides=2))
+cnn.add(tf.keras.layers.MaxPool2D(pool_size = 2, strides=2))
 
 #Flattening layer
 cnn.add(tf.keras.layers.Flatten())
@@ -50,5 +51,10 @@ cnn.add(tf.keras.layers.Dense(units = 128, activation = "relu", ))
 #Output
 cnn.add(tf.keras.layers.Dense(units = 1, activation = "sigmoid"))
 
+cnn.compile(optimizer = "adam", loss = 'binary_crossentropy', metrics = ['accuracy'])
+
+cnn.fit(x = train_dataset, validation_data = test_dataset, epochs = 10)
+
+cnn.save('model.h5')
 
 
