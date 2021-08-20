@@ -15,6 +15,7 @@ test_image = image.img_to_array(test_image)
 test_image = np.expand_dims(test_image, axis = 0)
 result = model.predict(test_image)
 
+#if result = 0, the form is bad, if result = 1, the form is good
 if result == 0:
     print('bad')
 if result == 1:
