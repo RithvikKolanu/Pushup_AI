@@ -1,7 +1,6 @@
 import "./App.css";
 import "./index.css";
 import { Link } from "react-router-dom";
-import App from "./App.js";
 
 function HomePage () {
 

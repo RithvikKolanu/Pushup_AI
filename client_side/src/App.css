@@ -12,10 +12,15 @@
   background-color: #7200dd;
 	
 	position: absolute;
-	top:0;
+	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
+}
+
+.camera {
+  top: 0;
+  left: 0;
 }
 
 .button {
@@ -35,7 +40,6 @@
 .App {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #282c34;
