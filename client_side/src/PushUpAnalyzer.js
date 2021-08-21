@@ -1,15 +1,43 @@
 import "./App.css"
 import "./index.css"
-import Home from "./HomePage.js"
-import App from "./App.js";
 import { useRef, useEffect, useState } from "react";
 
 function PushUpAnalyzer() {
 
-  const feedback = useState('Insert Workout Feedback Here');
+  const [feedback, setFeedback] = useState("Feedback: You're doing great!");
 
   const videoRef = useRef(null);
   const photoRef = useRef(null);
+
+  const [counter, setCounter] = useState(0);
+  const [secondsLeft, setSecondsLeft] = useState(15);
+  const [displayMessage, setDisplayMessage] = useState('Start Your Pushups In ');
+  const [frameNumber, setFrameNumber] = useState(0);
+
+  useEffect (() => {
+    if (secondsLeft > 0) {
+      setTimeout(() => setSecondsLeft(secondsLeft - 1), 1000)
+    } else {
+      if (counter === 0) {
+        setDisplayMessage("Start Doing Pushups Now!")
+        setSecondsLeft(30)
+        setCounter(1)
+      } else {
+        setDisplayMessage("Great Job!")
+        setSecondsLeft("Complete")
+        setFeedback("")
+      }
+    }
+  }, [secondsLeft, counter])
+
+  useEffect (() => {
+    if (counter === 1) {
+      setTimeout(() => {
+        getPhoto()
+        setFrameNumber(frameNumber + 1)
+      }, 100)
+    }
+  }, [counter, frameNumber])
 
   const getVideo = () => {
     navigator.mediaDevices
@@ -25,16 +53,20 @@ function PushUpAnalyzer() {
         console.error(err);
       })
   }
-
-  // This is where you'll get you're image, you're processing what's under the context variable.
-  // P.S. The function isn't actually being called anywhere, that'll need to be done as well.
+  
   const getPhoto = () => {
+    const width = 1920;
+    const height = width / (16/9);
     let video = videoRef.current;
     let photo = photoRef.current;
-    photo.width = 1920;
-    photo.height = 1080;
+    photo.width = width;
+    photo.height = height;
     let context = photo.getContext('2d');
-    context.drawImage(video, 0, 0, 1920, 1080);
+    context.drawImage(video, 0, 0, width, height);
+    let a = document.createElement('a')
+    a.href = photo.toDataURL();
+    a.download = {frameNumber} + ".jpg";
+    a.click();
   }
 
   useEffect(() =>  {
@@ -48,7 +80,8 @@ function PushUpAnalyzer() {
         <br></br>
         <br></br>
         <h1 align="center" style={{color: 'white'}}>
-          {feedback}
+          <h5>{displayMessage} [{secondsLeft}]</h5>
+          <h5>{feedback}</h5>
         </h1>
       </div>
       <div className={'result'}>

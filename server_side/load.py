@@ -4,8 +4,10 @@ from keras_preprocessing import image
 from keras.models import load_model
 
 #make these paths relative instead of fixed
-model = load_model('c:/projects/workout_app/server_side/model.h5')
-path = "c:/projects/workout_app/server_side/content"
+model = load_model(os.getcwd + '/model.h5')
+#model = load_model('c:/projects/workout_app/server_side/model.h5')
+path = os.getcwd + '/content'
+#path = "c:/projects/workout_app/server_side/content"
 
 
 #load the react image in the first path here
