@@ -1,4 +1,5 @@
 import "./App.css"
+import "./index.css"
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import Webcam from 'react-webcam';

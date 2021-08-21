@@ -42,17 +42,28 @@ code {
 }
 
 .homepage {
+  border-width: 20px;
+  border-color: #282c34;
+  background-image: url("./images/gym.jpeg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background: 'rgba(0, 0, 0, 0.5)';
   background-color: #282c34;
   margin: 0 auto;
   text-align: center;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-size: calc(10px + 2vmin);
-  font-family: 'Fira Sans', sans-serif;
   color: white;
   top: 100;
+}
+
+.title {
+  font-size: 45px;
 }
 
 .homepage button {

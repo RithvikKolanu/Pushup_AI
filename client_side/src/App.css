@@ -2,14 +2,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Urbanist', 'Fira Sans', sans-serif;
 }
 
 .content {
   min-height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: #7200dd;
+  background-color: #282c34;
 	
 	position: absolute;
 	top: 0;
@@ -24,17 +24,12 @@
 }
 
 .button {
-  font: bold 14px Arial;
+  font: bold 14px;
   text-decoration: none;
-  background-color: rgb(77, 109, 134);
+  background-color: rgba(77, 109, 134, 0.5);
   background-position: 0%;
   color: white;
-  padding: 8px 24px 8px 24px;
-  border-top: 2px solid rgb(112, 131, 146);
-  border-right: 2px solid rgb(58, 83, 102);
-  border-bottom: 2px solid rgb(58, 83, 102);
-  border-left: 2px solid rgb(112, 131, 146);
-  font-family: 'Fira Sans', sans-serif;
+  padding: 4px 12px 4px 12px;
 }
 
 .App {
