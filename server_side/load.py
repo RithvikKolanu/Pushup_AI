@@ -3,15 +3,13 @@ import os
 from keras_preprocessing import image
 from keras.models import load_model
 
-#make these paths relative instead of fixed
-model = load_model(os.getcwd + '/model.h5')
-#model = load_model('c:/projects/workout_app/server_side/model.h5')
-path = os.getcwd + '/content'
-#path = "c:/projects/workout_app/server_side/content"
+currentDir = os.getcwd()
+model = load_model(os.path.join(currentDir, 'model.h5'))
+path = os.path.join(currentDir, 'Content')
 
 
 #load the react image in the first path here
-test_image = image.load_img(path+"/validation/bad/1455.jpg", target_size=[64, 64])
+test_image = image.load_img(path+"/validation/good/1535.jpg", target_size=[64, 64])
 
 test_image = image.img_to_array(test_image)
 test_image = np.expand_dims(test_image, axis = 0)
