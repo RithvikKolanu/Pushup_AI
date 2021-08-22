@@ -15,9 +15,7 @@ function HomePage () {
                         wrapper="b"
                         steps={[
                             "innovation", 1500,
-                            "your training spotter", 1500, 
-                            "an AI", 1500,
-                            "your workout assistant", 1500,
+                            "your new trainer", 1500, 
                             "Gymspiration", 1500
                         ]}
                     />.

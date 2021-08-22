@@ -11,7 +11,7 @@ from tensorflow.python.keras.backend import binary_crossentropy, conv2d
 
 #this is the path for the pictures
 #make this a relative path
-path = "c:/projects/workout_app/server_side/content"
+path = "/Users/Kalp/GitHubRepos/workout_app/server_side/Content"
 
 print(cv2.imread(path + "/training/good/3.jpg").shape)
 
@@ -53,7 +53,7 @@ cnn.add(tf.keras.layers.Dense(units = 1, activation = "sigmoid"))
 
 cnn.compile(optimizer = "adam", loss = 'binary_crossentropy', metrics = ['accuracy'])
 
-cnn.fit(x = train_dataset, validation_data = test_dataset, epochs = 10)
+cnn.fit(x = train_dataset, validation_data = test_dataset, epochs = 20)
 
 cnn.save('model.h5')
 

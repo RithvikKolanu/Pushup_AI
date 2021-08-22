@@ -1,14 +1,15 @@
 import cv2
+import os
 
-capture = cv2.VideoCapture('c:/projects/workout_app/server_side/Content/bad_form.mp4')
-framenr = 0
+capture = cv2.VideoCapture(os.path.join(os.getcwd(), 'Content', 'bad_form.mp4'))
+framenr = 1240
 
 while(True):
     success, frame = capture.read()
     print("worked")
 
     if success:
-        cv2.imwrite(f'c:/projects/workout_app/server_side/Content/al/{framenr}.jpg', frame)
+        cv2.imwrite("/Users/Kalp/GitHubRepos/workout_app/server_side/Content/training/bad/%d.jpg" % framenr, frame)
         print("success")
     else:
         print('failed')
